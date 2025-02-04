@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Flatlist, Button, ImageBackground } from 'react-native';
 import QuoteScreen from '@/components/QuoteScreen';
 import { NavigationContainer, NavigationIndependentTree } from '@react-navigation/native';
-import backgroundImage from '@/assets/images/serene.png';
+//import backgroundImage from '@/assets/images/serene.png';
 import SignOut from '@/components/SignOut'
 import ProfileButton from '@/components/ProfileButton';
+import MenuButton from '@/components/MenuButton';
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import { auth } from "@/firebaseConfig";
 import db from "@/firebaseConfig";
@@ -40,15 +41,14 @@ export default function HomeScreen() {
 
     return (
         <ImageBackground 
-            source={backgroundImage}
+            //source={backgroundImage}
             style={styles.container}
         >
             <View style={styles.backgroundContainer}>
                 <View style={styles.titleGroup}>        
                     <Text style={styles.text}>Welcome, {userName || 'Guest'}!</Text>
                     <View style={styles.menu}>
-                        <ProfileButton/>
-                        <SignOut/>
+                        <MenuButton/>
                     </View>
                 </View>
                 <View style={styles.title}>
@@ -68,16 +68,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         display: 'flex',
         gap: 10,
-        backgroundColor: 'pink',
-
+        backgroundColor: 'black',
+        
     },
+
     backgroundContainer: {
         display: 'flex',
         flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         gap: 20,
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         borderRadius: 10,
-        padding: 100
+        paddingTop: 100,
+        height: '90%',
     },
     text: {
         fontSize: 14,
@@ -99,15 +102,19 @@ const styles = StyleSheet.create({
     titleGroup: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
         gap: 10,
         marginTop: 0,
         fontSize: 10,
+        width: '90%',
+
+        
     },
     menu: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         backgroundColor: 'transparent',
         fontSize: 10,
     }

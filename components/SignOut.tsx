@@ -22,25 +22,18 @@ export default function SignOut() {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-                <Text style={styles.buttonText}>Sign Out</Text>
+                <Text style={styles.menuItem}>Sign Out</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        backgroundColor: 'transparent',
-        marginLeft: 10,
+
+    menuItem: {
+        color: 'lightblue',
+        fontSize: 16,
+        paddingVertical: 5,
     },
-    button: {
-        color: 'white',
-        borderRadius: 5,
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 14,
-    },
+    
 });

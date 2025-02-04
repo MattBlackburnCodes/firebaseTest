@@ -59,11 +59,11 @@ export default function QuotesScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",
         padding: 30,
-        width: "150%",
-        height: "150%",
+        width: "100%",
+        height: "80%",
             
     },
     quotes: {

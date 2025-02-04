@@ -9,7 +9,9 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 export default function ProfileScreen() {
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
+    const [email, setEmail] = useState();
     const [userName, setUserName] = useState(""); // Stores fetched name
+    const [userAge, setUserAge] = useState(""); // Stores fetched age
     const navigation = useNavigation();
     const user = auth.currentUser; // Get logged-in user
 
@@ -28,6 +30,7 @@ export default function ProfileScreen() {
 
             if (docSnap.exists()) {
                 setUserName(docSnap.data().name); // Set name in state
+                setUserAge(docSnap.data().age); // Set age in state
             } else {
                 console.log("No user data found");
             }
@@ -41,8 +44,13 @@ export default function ProfileScreen() {
         if (!user) return;
         try {
             const userRef = doc(db, "users", user.uid);
+            const newUserData = {
+                name: name.trim() !== "" ? name : userName,
+                age: age.trim() !== "" ? age : userAge,
+            }
             await setDoc(userRef, { name, age }, { merge: true });
-            setUserName(name); // Update displayed name after saving
+            setUserName(newUserData.name); // Update displayed name after saving
+            setUserAge(newUserData.age); // Update displayed age after saving
             console.log("User saved successfully!");
         } catch (error) {
             console.error("Error saving user: ", error);
@@ -59,19 +67,28 @@ export default function ProfileScreen() {
             <View style={styles.container}>
                 <Text style={styles.title}>Hello, {userName || "Guest"}!</Text>
                 <Text style={styles.title}>Profile</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter Your Name"
-                    value={name}
-                    onChangeText={setName}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter Your Age"
-                    value={age}
-                    onChangeText={setAge}
-                    keyboardType="number-pad"
-                />
+                <View style={styles.mainPage}>
+                    <View style={styles.leftContainer}>
+                        <Text style={styles.title}>Name: {userName || "Guest"}</Text>
+                        <Text style={styles.title}>Age: {userAge || "N/A"}</Text>
+                        
+                    </View>
+                    <View style={styles.rightContainer}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Your Name"
+                            value={name}
+                            onChangeText={setName}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Your Age"
+                            value={age}
+                            onChangeText={setAge}
+                            keyboardType="number-pad"
+                        />
+                        </View>
+                </View>
                 <Button title="Save Profile" onPress={saveUser} />
                 <GoBack />
             </View>
@@ -98,13 +115,31 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: "black",
-        width: 200,
+        width: 100,
+        height: 40,
         padding: 10,
         borderRadius: 5,
         marginBottom: 10,
         color: "white",
         borderColor: "white",
         borderWidth: 1,
+    },
+    mainPage: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        gap: 40,
+        padding: 10,
+    },
+    leftContainer: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 40,
+    },
+    rightContainer: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 10,
     },
 });
 
