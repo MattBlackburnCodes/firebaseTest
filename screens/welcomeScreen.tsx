@@ -45,15 +45,18 @@ export default function HomeScreen() {
             style={styles.container}
         >
             <View style={styles.backgroundContainer}>
-                <View style={styles.titleGroup}>        
-                    <Text style={styles.text}>Welcome, {userName || 'Guest'}!</Text>
+            
+                <View style={styles.titleGroup}> 
+                    <View style={styles.titleLeft}>
+                        <Text style={styles.title}>Quotify</Text>       
+                        <Text style={styles.text}>Welcome, {userName || 'Guest'}!</Text>
+                    </View>
                     <View style={styles.menu}>
                         <MenuButton/>
                     </View>
                 </View>
                 <View style={styles.title}>
-                    <Text style={styles.title}>Quotify</Text>
-                    <Text style={styles.slogan}>Inspiring Minds Daily</Text>
+                    
                 </View>
                 <QuoteScreen/>
             </View>
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         display: 'flex',
         gap: 10,
         backgroundColor: 'black',
@@ -75,23 +78,32 @@ const styles = StyleSheet.create({
     backgroundContainer: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         gap: 20,
         borderRadius: 10,
         paddingTop: 100,
         height: '90%',
+
+        
     },
     text: {
-        fontSize: 14,
+        fontSize: 16,
         color: 'lightblue',
         textAlign: 'center',
     },
     title: {
-        fontSize: 48,
+        fontSize: 20,
         color: 'lightblue',
         fontStyle: 'italic',
         textAlign: 'center',
+    },
+    titleLeft: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        gap: 10,
     },
     slogan: {
         fontSize: 18,
@@ -103,12 +115,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         gap: 10,
         marginTop: 0,
-        fontSize: 10,
         width: '90%',
-
         
     },
     menu: {
