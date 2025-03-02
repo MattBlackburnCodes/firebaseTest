@@ -62,8 +62,9 @@ export default function HomeScreen() {
                     
                 </View>
                 <QuoteScreen/>
-                <TestBanner/>
+                
             </View>
+            <TestBanner/>
         </ImageBackground>
     )
 }
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         display: 'flex',
         gap: 10,
         backgroundColor: 'black',
