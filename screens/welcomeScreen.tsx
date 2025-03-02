@@ -10,7 +10,10 @@ import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/nativ
 import { auth } from "@/firebaseConfig";
 import db from "@/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
- 
+import SmallNameLogo from '@/components/SmallNameLogo';
+import { useFonts, Pacifico_400Regular } from '@expo-google-fonts/pacifico';
+import TestBanner from '@/components/TestBanner';
+
 export default function HomeScreen() {
     const navigation = useNavigation();
     const route = useRoute();
@@ -48,7 +51,7 @@ export default function HomeScreen() {
             
                 <View style={styles.titleGroup}> 
                     <View style={styles.titleLeft}>
-                        <Text style={styles.title}>Quotify</Text>       
+                        <SmallNameLogo/>      
                         <Text style={styles.text}>Welcome, {userName || 'Guest'}!</Text>
                     </View>
                     <View style={styles.menu}>
@@ -59,6 +62,7 @@ export default function HomeScreen() {
                     
                 </View>
                 <QuoteScreen/>
+                <TestBanner/>
             </View>
         </ImageBackground>
     )
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         gap: 10,
         marginTop: 0,
         width: '90%',
@@ -127,5 +131,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         backgroundColor: 'transparent',
         fontSize: 10,
+        zIndex: 2,
     }
 })

@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import NameLogo from './NameLogo';
+import {useFonts, Pacifico_400Regular} from '@expo-google-fonts/pacifico';
 
 export default function Logo(){
     return (
         <View style={styles.containerTitle}>
-            <Text style={styles.title}>Quotify</Text>
+            <NameLogo/>
             <Text style={styles.headline}>Inspiring Minds Daily</Text>
         </View>
     )
@@ -19,6 +21,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
+        gap: 20,
     },
     title: {
         fontSize: 24,
@@ -29,5 +32,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginBottom: 16,
         color: 'white',
+        
     },
 });

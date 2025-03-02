@@ -3,12 +3,12 @@ import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableWithoutFeedb
 import {
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
 } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { auth } from '../firebaseConfig';
-import { HelloWave } from '@/components/HelloWave';
 import Logo from '../components/SigninLogo';
+import { useFonts, Pacifico_400Regular } from '@expo-google-fonts/pacifico';
 
 
 export default function AuthScreen() {
@@ -22,7 +22,6 @@ export default function AuthScreen() {
             if (isLogin) {
                 // Login user
                 await signInWithEmailAndPassword(auth, email, password);
-                Alert.alert('Success', 'You are logged in!');
                 navigation.navigate('welcomeScreen');
             } else {
                 // Signup user
@@ -31,7 +30,6 @@ export default function AuthScreen() {
                 navigation.navigate('welcomeScreen');
             }
         } catch (error) {
-            console.error(error);
             Alert.alert('Error','Invalid email or password');
         }
     };
@@ -42,7 +40,7 @@ export default function AuthScreen() {
             Alert.alert('Success', 'Password reset email sent!');
         } catch (error) {
             console.error(error);
-            Alert.alert('Error', 'Invalid email');
+            Alert.alert('Error', 'Invalid email or password');
         }
     };
 
@@ -65,8 +63,8 @@ export default function AuthScreen() {
                     onChangeText={setPassword}
                     secureTextEntry
                 />
-                <Button title={isLogin ? 'Log In' : 'Sign Up'} onPress={handleAuth} />
-                <Button title="Reset Password" onPress={handleResetPassword} color="blue" />
+                <Button title={isLogin ? 'Log In' : 'Sign Up'} onPress={handleAuth} color="lightblue"/>
+                <Button title="Reset Password" onPress={handleResetPassword} color="lightblue" />
                 <Button
                     title={isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Log In'}
                     onPress={() => setIsLogin(!isLogin)}
@@ -84,6 +82,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 16,
         backgroundColor: 'black',
+        gap: 20,
 
     },
     title: {
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
         padding: 8,
         marginVertical: 8,
         borderWidth: 1,
-        borderColor: 'pink',
+        borderColor: 'yellow',
         borderRadius: 4,
         color: 'white',
     },

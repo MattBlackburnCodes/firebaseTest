@@ -54,8 +54,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         marginLeft: 10,
         width: '60%',
-
-        
     },
     menu: {
         position: 'absolute',
@@ -64,9 +62,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         borderRadius: 5,
         padding: 10,
-        zIndex: 1,
         width: '70%',
-
     },
     menuItem: {
         color: 'lightblue',

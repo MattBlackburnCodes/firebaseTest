@@ -29,8 +29,8 @@ export default function ProfileScreen() {
             const docSnap = await getDoc(userRef);
 
             if (docSnap.exists()) {
-                setUserName(docSnap.data().name); // Set name in state
-                setUserAge(docSnap.data().age); // Set age in state
+                setUserName(docSnap.data().name || "Guest"); // Set name in state
+                setUserAge(docSnap.data().age || "NA");// Set age in state
             } else {
                 console.log("No user data found");
             }
@@ -48,19 +48,16 @@ export default function ProfileScreen() {
                 name: name.trim() !== "" ? name : userName,
                 age: age.trim() !== "" ? age : userAge,
             }
-            await setDoc(userRef, { name, age }, { merge: true });
+            await setDoc(userRef, newUserData, { merge: true });
             setUserName(newUserData.name); // Update displayed name after saving
             setUserAge(newUserData.age); // Update displayed age after saving
+            setName(""); // Clear input field
+            setAge(""); // Clear input field
             console.log("User saved successfully!");
         } catch (error) {
             console.error("Error saving user: ", error);
         }
     };
-
-    /*const handleSubmit = () => {
-        saveUser();
-        navigation.navigate("welcomeScreen", { data: username });
-    }*/
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -71,7 +68,6 @@ export default function ProfileScreen() {
                     <View style={styles.leftContainer}>
                         <Text style={styles.title}>Name: {userName || "Guest"}</Text>
                         <Text style={styles.title}>Age: {userAge || "N/A"}</Text>
-                        
                     </View>
                     <View style={styles.rightContainer}>
                         <TextInput
@@ -95,6 +91,18 @@ export default function ProfileScreen() {
         </TouchableWithoutFeedback>
     );
 }
+
+/*
+<TextInput
+                            style={styles.input}
+                            placeholder="Enter Your Age"
+                            value={age}
+                            onChangeText={setAge}
+                            keyboardType="number-pad"
+                        />
+
+                        <Text style={styles.title}>Age: {userAge || "N/A"}</Text>
+*/
 
 const styles = StyleSheet.create({
     container: {

@@ -17,6 +17,8 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarShowLabel: false,
+        
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
@@ -29,6 +31,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          tabBarStyle: { display: 'none' },
           title: 'Home',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}

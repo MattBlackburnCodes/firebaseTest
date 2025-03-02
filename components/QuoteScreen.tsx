@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, Share } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, Share} from "react-native";
 import { TouchableOpacity } from "react-native";
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import db, { auth } from "@/firebaseConfig";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import ShareButton from "@/components/ShareButton";
+import DropDownPicker from 'react-native-dropdown-picker';
+import AdBanner from "@/components/AdBanner";
+import TestBanner from "@/components/TestBanner";
+
 
 export default function QuotesScreen() {
+  const [selectedCategory, setSelectedCategory] = useState("randomQuotes");
   const [quote, setQuote] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [user, setUser] = useState(null);
-  const apiURL = "https://zenquotes.io/api/quotes";
+  const [open, setOpen] = useState(false);
+  const apiURL = "https://quote-api-xi.vercel.app/api/quotes";
 
   // 🔹 Listen for auth state changes (fixes auth.currentUser not updating)
   useEffect(() => {
@@ -26,7 +32,7 @@ export default function QuotesScreen() {
   // 🔹 Fetch a quote when the screen loads
   useEffect(() => {
     fetchQuote();
-  }, []);
+  }, [selectedCategory]);
 
   // 🔹 Check if the quote is a favorite when `quote` or `user` changes
   useEffect(() => {
@@ -39,9 +45,11 @@ export default function QuotesScreen() {
     fetch(apiURL)
       .then((response) => response.json())
       .then((data) => {
-        const randomIndex = Math.floor(Math.random() * data.length);
-        const randomQuote = data[randomIndex];
-        setQuote(randomQuote);
+        if (data[selectedCategory]){
+          const randomIndex = Math.floor(Math.random() * data[selectedCategory].length);
+          const randomQuote = data[selectedCategory][randomIndex];
+          setQuote(randomQuote);
+        }
         setLoading(false);
       })
       .catch((error) => {
@@ -99,7 +107,24 @@ export default function QuotesScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.pickerContainer}>
+        <Text style={styles.pickerTitle}>Categories</Text>
+        <DropDownPicker
+            open={open}
+            value={selectedCategory}
+            items={[
+                {label: 'Random Quotes', value: 'randomQuotes'},
+                {label: 'Black History Quotes', value: 'blackHistoryQuotes'},
+                {label: 'Motivational Quotes', value: 'motivationalQuotes'},
+                {label: 'Funny Quotes', value: 'funnyQuotes'}
+            ]}
+            setOpen={setOpen}
+            setValue={setSelectedCategory} 
+            style={styles.pickerSelection}
+        />
+      </View>
         <View style={styles.quotes}>
+        
             <Text style={styles.quoteText}>{quote.q}</Text>
             <Text style={styles.authorText}>- {quote.a}</Text>
         </View>
@@ -118,22 +143,42 @@ export default function QuotesScreen() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: "space-evenly",
+        flex:1,
+        justifyContent: "space-around",
         alignItems: "center",
         padding: 30,
         width: "100%",
-        height: "80%",
-
-            
+        height: "100%", 
+    },
+    banner: {
+        position: "absolute",
+        bottom: 0,
+    },
+    pickerContainer: {
+        width: "60%",
+        height: 20,
+        flex: 1,
+        alignItems: "center",
+        flexDirection: "row",
+        gap: 10,
+        zIndex: 1,
+    },
+    pickerTitle:{
+        color: "white",
+        fontSize: 18,
+        borderColor: "white",
+        textAlign: "center",
+      },
+    pickerSelection: {
+        justifyContent: "center",
+        alignItems: "center",        
     },
     quotes: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        opacity: .8,
-
-        borderRadius: 10,   
+        borderRadius: 10,
+        flex: 5,
     },
     button: {
         backgroundColor: 'gray',

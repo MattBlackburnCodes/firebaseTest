@@ -32,7 +32,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
@@ -45,6 +46,12 @@
         "projectId": "17d52cb7-6192-435f-ba81-8c653e4c9e6c"
       }
     },
-    "owner": "mattblackburncodes"
+    "owner": "mattblackburncodes",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/17d52cb7-6192-435f-ba81-8c653e4c9e6c"
+    }
   }
 }
