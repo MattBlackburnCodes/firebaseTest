@@ -58,9 +58,6 @@ export default function HomeScreen() {
                         <MenuButton/>
                     </View>
                 </View>
-                <View style={styles.title}>
-                    
-                </View>
                 <QuoteScreen/>
                 
             </View>

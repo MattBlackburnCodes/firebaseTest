@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, Share} from "react-native";
-import { TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, Share, TouchableOpacity} from "react-native";
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import db, { auth } from "@/firebaseConfig";
 import { doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
@@ -9,6 +8,7 @@ import ShareButton from "@/components/ShareButton";
 import DropDownPicker from 'react-native-dropdown-picker';
 import AdBanner from "@/components/AdBanner";
 import TestBanner from "@/components/TestBanner";
+import QuoteFetcher from "./QuoteFetcher";
 
 
 export default function QuotesScreen() {
@@ -98,7 +98,7 @@ export default function QuotesScreen() {
     return (
       <View style={styles.container}>
         <Text style={styles.loadingText}>Failed to load quote.</Text>
-        <TouchableOpacity style={styles.button} onPress={fetchQuote}>
+        <TouchableOpacity style={styles.button} onPress={QuoteFetcher}>
           <Text style={styles.buttonText}>Get New Quote</Text>
         </TouchableOpacity>
       </View>
@@ -116,25 +116,20 @@ export default function QuotesScreen() {
                 {label: 'Random Quotes', value: 'randomQuotes'},
                 {label: 'Black History Quotes', value: 'blackHistoryQuotes'},
                 {label: 'Motivational Quotes', value: 'motivationalQuotes'},
-                {label: 'Funny Quotes', value: 'funnyQuotes'}
+                {label: 'Funny Quotes', value: 'funnyQuotes'},
+                {label: 'Affirmation Quotes', value: 'affirmations'},
             ]}
             setOpen={setOpen}
             setValue={setSelectedCategory} 
             style={styles.pickerSelection}
         />
       </View>
-        <View style={styles.quotes}>
-        
-            <Text style={styles.quoteText}>{quote.q}</Text>
-            <Text style={styles.authorText}>- {quote.a}</Text>
-        </View>
+      <QuoteFetcher selectedCategory={selectedCategory} onQuoteFetched={setQuote} /> 
         <View style={styles.buttonRow}>
             <TouchableOpacity style={styles.button} onPress={toggleFavorite}>
                 <MaterialIcons onPress={toggleFavorite} name="favorite" size={24} color={isFavorite ? "red" : "white"} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={fetchQuote}>
-                <FontAwesome5 name="quote-right" size={24} color="white" />
-            </TouchableOpacity>
+            
             <ShareButton style={styles.button} quote={quote} />
         </View> 
     </View>
@@ -144,12 +139,12 @@ export default function QuotesScreen() {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",
         padding: 30,
         width: "100%",
-        height: "100%", 
     },
+
     banner: {
         position: "absolute",
         bottom: 0,
@@ -158,10 +153,11 @@ const styles = StyleSheet.create({
         width: "60%",
         height: 20,
         flex: 1,
-        alignItems: "center",
+        alignItems: "flex-start",
         flexDirection: "row",
         gap: 10,
         zIndex: 1,
+        
     },
     pickerTitle:{
         color: "white",
@@ -214,7 +210,6 @@ const styles = StyleSheet.create({
     buttonRow: {
         display: "flex",
         flexDirection: "row",
-        alignItems: "center",
         width: "100%",
         gap: "5%"
     },
