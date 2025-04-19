@@ -6,6 +6,7 @@ import WelcomeScreen from '@/screens/welcomeScreen';
 import TitleScreen from '@/screens/titleScreen';
 import ProfileScreen from '@/screens/profileScreen';
 import SavedQuotesScreen from '@/screens/savedQuotesScreen';
+import InfoScreen from '@/screens/infoScreen';
 
 
 const Stack = createStackNavigator();
@@ -39,6 +40,11 @@ export default function AppNavigator() {
               <Stack.Screen 
                 name="savedQuotesScreen"
                 component={SavedQuotesScreen}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen 
+                name="infoScreen"
+                component={InfoScreen}
                 options={{headerShown: false}}
               />
           </Stack.Navigator>

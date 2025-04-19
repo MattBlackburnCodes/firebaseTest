@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import InfoScreen from "@/screens/infoScreen";
 
 export default function QuoteFetcher({ selectedCategory, onQuoteFetched }) {
   const [quotes, setQuotes] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const apiURL = "https://quote-api-xi.vercel.app/api/quotes";
+
+  const navigation = useNavigation();
+  
+  const goToInfoScreen = () => {
+    // Pass the quote to the InfoScreen
+    const quote = quotes[currentIndex]; // Get the current quote
+    navigation.navigate("infoScreen", { quote });
+  }
+
 
   useEffect(() => {
     fetchQuotes();
@@ -84,8 +96,13 @@ export default function QuoteFetcher({ selectedCategory, onQuoteFetched }) {
   return (
     <View style={styles.quotes}>
       <Text style={styles.quoteText}>{quotes[currentIndex].q}</Text>
-      <Text style={styles.authorText}>{quotes[currentIndex].a}</Text>
-      <Text style={styles.authorText}>{quotes[currentIndex].i}</Text>
+      <View style={styles.authorTextContainer}>
+        <Text style={styles.authorText}>{quotes[currentIndex].a}</Text>
+        <TouchableOpacity style={styles.infoButton} onPress={goToInfoScreen}>
+          <FontAwesome5 name="info" size={12} />
+        </TouchableOpacity>
+      </View>
+      
       <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.button} onPress={() => navigateQuote("previous")}>
           <Text style={styles.buttonText}>{"←"}</Text>
@@ -116,6 +133,13 @@ const styles = StyleSheet.create({
         color: "white",
         padding: 10,
     },
+    authorTextContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "85%",
+        paddingHorizontal: 20,
+    },
     authorText: { 
         fontSize: 18, 
         color: "yellow", 
@@ -129,7 +153,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         marginTop: 15,
-
         width: "100%",
     },
     button: {
@@ -138,6 +161,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         margin: 10,
         width: "30%",
+    },
+    infoButton: {
+      backgroundColor: "white",
+      padding: 10,
+      borderRadius: 50,
+      width: "15%",
+      alignItems: "center",
+      
     },
     buttonText: { 
         color: "white",
