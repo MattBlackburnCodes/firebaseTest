@@ -48,7 +48,7 @@ export default function AuthScreen() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
                 <Logo />
-                <Text style={styles.title}>{isLogin ? 'Log In' : 'Sign Up'}</Text>
+                <Text allowFontScaling={false} style={styles.title}>{isLogin ? 'Log In' : 'Sign Up'}</Text>
                 <TextInput
                     style={styles.input}
                     placeholder="Email"

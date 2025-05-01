@@ -19,7 +19,7 @@ let [fontsLoaded] = useFonts({
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Quotify</Text>
+            <Text allowFontScaling={false} style={styles.title}>Quotify</Text>
         </View>
     )
 }

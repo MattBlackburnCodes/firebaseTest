@@ -74,8 +74,8 @@ export default function SavedQuotesScreen() {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
                 <View style={styles.quoteContainer}>
-                  <Text style={styles.quoteText}>{item.quote}</Text>
-                  <Text style={styles.authorText}>- {item.author}</Text>
+                  <Text maxFontSizeMultiplier={1.3} style={styles.quoteText}>{item.quote}</Text>
+                  <Text maxFontSizeMultiplier={1.3} style={styles.authorText}>- {item.author}</Text>
                   <TouchableOpacity onPress={() => removeFavorite(item.id)}>
                       <MaterialIcons name="delete" size={24} color="red" />
                   </TouchableOpacity>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
   quoteText: {
-    fontSize: 18,
+    fontSize: 20,
     fontStyle: "italic",
     color: "white",
     flex: 1,

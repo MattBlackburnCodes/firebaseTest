@@ -95,9 +95,9 @@ export default function QuoteFetcher({ selectedCategory, onQuoteFetched }) {
 
   return (
     <View style={styles.quotes}>
-      <Text style={styles.quoteText}>{quotes[currentIndex].q}</Text>
+      <Text allowFontScaling={false} style={styles.quoteText}>{quotes[currentIndex].q}</Text>
       <View style={styles.authorTextContainer}>
-        <Text style={styles.authorText}>{quotes[currentIndex].a}</Text>
+        <Text allowFontScaling={false} style={styles.authorText}>{quotes[currentIndex].a}</Text>
         <TouchableOpacity style={styles.infoButton} onPress={goToInfoScreen}>
           <FontAwesome5 name="info" size={12} />
         </TouchableOpacity>
@@ -105,13 +105,13 @@ export default function QuoteFetcher({ selectedCategory, onQuoteFetched }) {
       
       <View style={styles.buttonRow}>
         <TouchableOpacity style={styles.button} onPress={() => navigateQuote("previous")}>
-          <Text style={styles.buttonText}>{"←"}</Text>
+          <Text allowFontScaling={false} style={styles.buttonText}>{"←"}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={fetchRandomQuote}>
-          <Text style={styles.buttonText}>{'🎲'}</Text>
+          <Text allowFontScaling={false} style={styles.buttonText}>{'🎲'}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigateQuote("next")}>
-          <Text style={styles.buttonText}>{"→"}</Text>
+          <Text allowFontScaling={false} style={styles.buttonText}>{"→"}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -123,11 +123,15 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-end",
         width: "100%",
-        height: "70%",
-        gap: "7%"
+        height: "100%",
+        gap: "10%",
+        display: "flex",
+        flex: 7,
+        paddingTop: 150,
+        
     },
     quoteText: {
-        fontSize: 24,
+        fontSize: 20,
         fontStyle: "italic",
         textAlign: "center",
         color: "white",
@@ -135,10 +139,11 @@ const styles = StyleSheet.create({
     },
     authorTextContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         width: "85%",
         paddingHorizontal: 20,
+        gap: 12
     },
     authorText: { 
         fontSize: 18, 
@@ -166,7 +171,7 @@ const styles = StyleSheet.create({
       backgroundColor: "white",
       padding: 10,
       borderRadius: 50,
-      width: "15%",
+      width: "12%",
       alignItems: "center",
       
     },

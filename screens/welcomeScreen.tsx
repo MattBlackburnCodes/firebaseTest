@@ -52,16 +52,15 @@ export default function HomeScreen() {
                 <View style={styles.titleGroup}> 
                     <View style={styles.titleLeft}>
                         <SmallNameLogo/>      
-                        <Text style={styles.text}>Welcome, {userName || 'Guest'}!</Text>
+                        <Text allowFontScaling={false} style={styles.text}>Welcome, {userName || 'Guest'}!</Text>
                     </View>
                     <View style={styles.menu}>
                         <MenuButton/>
                     </View>
                 </View>
                 <QuoteScreen/>
-                
             </View>
-            <TestBanner/>
+            
         </ImageBackground>
     )
 }
@@ -70,25 +69,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-evenly',
-        display: 'flex',
+        justifyContent: 'space-between',
         gap: 10,
         backgroundColor: 'black',
         width: '100%',
-        padding: 20,
-        
+        padding: 5,
     },
 
     backgroundContainer: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         alignItems: 'center',
-        gap: 20,
+        gap: 40,
         borderRadius: 10,
         paddingTop: 100,
         height: '90%',
-
         
     },
     text: {
@@ -101,6 +97,7 @@ const styles = StyleSheet.create({
         color: 'lightblue',
         fontStyle: 'italic',
         textAlign: 'center',
+        
     },
     titleLeft: {
         display: 'flex',
@@ -123,7 +120,6 @@ const styles = StyleSheet.create({
         gap: 10,
         marginTop: 0,
         width: '90%',
-        
     },
     menu: {
         display: 'flex',

@@ -14,7 +14,7 @@ export default function GoBack() {
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={handleGoBack}>
                 <MaterialIcons name="arrow-back" size={24} color="white" />
-                <Text style={styles.buttonText}>Go Back</Text>
+                <Text allowFontScaling={false} style={styles.buttonText}>Go Back</Text>
             </TouchableOpacity>
         </View>
     )

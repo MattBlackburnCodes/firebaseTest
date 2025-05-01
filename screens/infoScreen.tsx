@@ -22,10 +22,12 @@ export default function InfoScreen() {
             <View style={styles.imageContain}>
                 <Image source={{ uri: quote.image }} style={styles.image} />
             </View>
-            <Text style={styles.textTitle}>{quote.a}</Text>
-            <Text style={styles.text}>{quote.i} </Text>
+            <View style={styles.textContain}>
+                <Text allowFontScaling={false} style={styles.textTitle}>{quote.a}</Text>
+                <Text allowFontScaling={false} style={styles.text}>{quote.i} </Text>
+            </View>
             <TouchableOpacity onPress={handleWikiLink} style={{ marginTop: 20 }}>
-                <Text style={{ color: 'lightblue', fontSize: 16, textDecorationLine: 'underline' }}>
+                <Text allowFontScaling={false} style={{ color: 'lightblue', fontSize: 16, textDecorationLine: 'underline' }}>
                     Learn more about {quote.a}
                 </Text>
             </TouchableOpacity>
@@ -38,7 +40,7 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
+        justifyContent: 'space-evenly',
         textAlign: 'left',
         backgroundColor: 'black',
         opacity: 0.8,
@@ -66,5 +68,10 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         borderRadius: 100,
-    }
+    },
+    textContain:{
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 10,
+    },
 })

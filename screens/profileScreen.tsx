@@ -62,21 +62,23 @@ export default function ProfileScreen() {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
-                <Text style={styles.title}>Hello, {userName || "Guest"}!</Text>
-                <Text style={styles.title}>Profile</Text>
+                <Text allowFontScaling={false} style={styles.title}>Hello, {userName || "Guest"}!</Text>
+                <Text allowFontScaling={false} style={styles.title}>Profile</Text>
                 <View style={styles.mainPage}>
                     <View style={styles.leftContainer}>
-                        <Text style={styles.title}>Name: {userName || "Guest"}</Text>
-                        <Text style={styles.title}>Age: {userAge || "N/A"}</Text>
+                        <Text allowFontScaling={false} style={styles.title}>Name: {userName || "Guest"}</Text>
+                        <Text allowFontScaling={false} style={styles.title}>Age: {userAge || "N/A"}</Text>
                     </View>
                     <View style={styles.rightContainer}>
                         <TextInput
+                            allowFontScaling={false}
                             style={styles.input}
                             placeholder="Enter Your Name"
                             value={name}
                             onChangeText={setName}
                         />
                         <TextInput
+                            allowFontScaling={false}
                             style={styles.input}
                             placeholder="Enter Your Age"
                             value={age}

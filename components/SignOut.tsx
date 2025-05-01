@@ -22,7 +22,7 @@ export default function SignOut() {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-                <Text style={styles.menuItem}>Sign Out</Text>
+                <Text allowFontScaling={false} style={styles.menuItem}>Sign Out</Text>
             </TouchableOpacity>
         </View>
     )

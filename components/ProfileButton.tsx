@@ -12,7 +12,7 @@ export default function ProfileButton() {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={handleGoBack}>
-                <Text style={styles.buttonText}>Profile</Text>
+                <Text allowFontScaling={false} style={styles.buttonText}>Profile</Text>
             </TouchableOpacity>
         </View>
     )

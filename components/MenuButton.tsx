@@ -30,13 +30,13 @@ export default function MenuButton() {
                 {menuVisible && (
                 <View style={styles.menu}>
                     <TouchableOpacity onPress={() => navigation.navigate("profileScreen")}>
-                        <Text style={styles.menuItem}>Profile</Text>
+                        <Text allowFontScaling={false} style={styles.menuItem}>Profile</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate("welcomeScreen")}>
-                        <Text style={styles.menuItem}>Quotes</Text>
+                        <Text allowFontScaling={false} style={styles.menuItem}>Quotes</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate("savedQuotesScreen")}>
-                        <Text style={styles.menuItem}>Saved Quotes</Text>
+                        <Text allowFontScaling={false} style={styles.menuItem}>Saved Quotes</Text>
                     </TouchableOpacity>
                     <SignOut />
                 </View>

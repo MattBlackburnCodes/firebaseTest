@@ -5,7 +5,7 @@ import { View, StyleSheet, Text } from 'react-native';
 export default function TestBanner() {
     return (
         <View style={styles.banner}>
-            <Text>Test Ad Banner</Text>
+            <Text allowFontScaling={false} >Test Ad Banner</Text>
         </View>
     );
 }

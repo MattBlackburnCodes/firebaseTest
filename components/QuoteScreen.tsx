@@ -108,7 +108,7 @@ export default function QuotesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.pickerContainer}>
-        <Text style={styles.pickerTitle}>Categories</Text>
+        <Text allowFontScaling={false} style={styles.pickerTitle}>Categories</Text>
         <DropDownPicker
             open={open}
             value={selectedCategory}
@@ -139,9 +139,9 @@ export default function QuotesScreen() {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center",
-        padding: 30,
+        padding: 0,
         width: "100%",
     },
 
